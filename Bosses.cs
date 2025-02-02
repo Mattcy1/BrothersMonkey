@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Il2CppAssets.Scripts.Models.Bloons.Behaviors;
@@ -221,7 +221,7 @@ namespace BossHandlerNamespace
 
                 BloonModel RedBad = CreateBossBase(5000000, Game.instance.model.GetBloon("Bad").speed);
 
-                BloonModel Bloonimarimaro = CreateBossBase(5000000, Game.instance.model.GetBloon("Vortex1").speed);
+                BloonModel Bloonimarimaro = CreateBossBase(5000000, Game.instance.model.GetBloon("Vortex1").speed / 2);
 
                 BloonModel Nova = CreateBossBase(5000000, Game.instance.model.GetBloon("Vortex1").speed);
 
@@ -1112,12 +1112,9 @@ namespace BossHandlerNamespace
 
         public void Start()
         {
-            //Bosses.fakeHealth = 10000000;
+            Bosses.fakeHealth = 10000000;
             Bosses.FinalBoss1 = boss;
-            //Bosses.fakeMaxHealth = 10000000;
-
-            Bosses.fakeMaxHealth = 100;
-            Bosses.fakeHealth = 100;
+            Bosses.fakeMaxHealth = 10000000;
         }
 
         public void Update()
@@ -1212,7 +1209,7 @@ namespace BossHandlerNamespace
         {
             Bosses.fakeHealth = 5000000;
             Bosses.fakeMaxHealth = 5000000;
-            InGame.instance.SetHealth(350);
+            InGame.instance.SetHealth(1000);
             BrotherMonkey.BrotherMonkey.boss = boss;
             Heart.HeartUI.CreatePanel();
             Story.StoryMessage[] messages = [
@@ -1236,7 +1233,17 @@ namespace BossHandlerNamespace
         {
             if (boss != null)
             {
-                boss.trackSpeedMultiplier = 0;
+                if (boss.PercThroughMap() > 0.99f)
+                {
+                    boss.trackSpeedMultiplier = -1;
+                }
+                else if (boss.PercThroughMap() <= 0.1f)
+                {
+                    boss.trackSpeedMultiplier = 1;
+                }
+
+                boss.Rotation = boss.PercThroughMap() * 1000;
+                boss.prevRot = boss.Rotation;
                 
                 registration.fakeHealth = Bosses.fakeHealth;
                 registration.fakeMaxHealth = Bosses.fakeMaxHealth;
