@@ -1324,9 +1324,6 @@ namespace BossHandlerNamespace
         public static void Postfix(Bloon __instance)
         {
             {
-                MelonLogger.Msg(__instance.bloonModel.baseId);
-                
-                
                 if (__instance.bloonModel.id.Contains("Totem"))
                 {
                     if (random.Next(2) == 0)
@@ -1356,7 +1353,7 @@ namespace BossHandlerNamespace
         }
     }
 
-    [HarmonyPatch(typeof(Bloon), nameof(Bloon.Damage))]
+    [HarmonyPatch(typeof(Bloon), nameof(Bloon.PreCheckDamageOutcome))]
     public class BloonPopped
     {
         [HarmonyPostfix]
