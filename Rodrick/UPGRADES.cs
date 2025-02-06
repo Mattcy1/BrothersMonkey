@@ -200,7 +200,7 @@ public class UPGRADES
         }
     }
 
-    [HarmonyPatch(typeof(Bloon), nameof(Bloon.Damage))]
+    [HarmonyPatch(typeof(Bloon), nameof(Bloon.ApplyDamageToBloon))]
     public class YouStuckLol
     {
         [HarmonyPostfix]
