@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using BossHandlerNamespace;
 using MelonLoader;
@@ -440,6 +440,7 @@ public class CorvusDisplay : ModDisplay
     public override string BaseDisplay => GetDisplay(TowerType.WizardMonkey, 3, 0, 0);
     public override void ModifyDisplayNode(UnityDisplayNode node)
     {
+        node.Dump();
         SetMeshOutlineColor(node, Color.blue);
         SetMeshOutlineColor(node, Color.blue, 1);
         SetMeshTexture(node, "Zephyr000");
@@ -453,6 +454,7 @@ public class RodrickDisplay : ModDisplay
 
     public override void ModifyDisplayNode(UnityDisplayNode node)
     { 
+        node.Dump();
         SetMeshTexture(node , "Rodrick000");
         SetMeshTexture(node , "Rodrick000", 1);
         SetMeshOutlineColor(node, Color.red);
